@@ -14,5 +14,9 @@ namespace MidtermProjectFitnessCenter
             
             
         }
+        public override string ToString()
+        {
+            return $"{Id},{Name},{Club}";
+        }
     }
 }

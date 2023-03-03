@@ -13,13 +13,13 @@ namespace MidtermProjectFitnessCenter
     {
         private static string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
         
-        private static string clubsFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\clubs.txt");
+        private static string clubsFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\DataSources\clubs.txt");
         private static string clubsFilePath = Path.GetFullPath(clubsFile);
 
-        private static string singleMembersFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\singleclubmembers.txt");
+        private static string singleMembersFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\DataSources\singleclubmembers.txt");
         private static string singleMembersFilePath = Path.GetFullPath(singleMembersFile);
 
-        private static string multiMembersFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\multiclubmembers.txt");
+        private static string multiMembersFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\DataSources\multiclubmembers.txt");
         private static string multiMembersFilePath = Path.GetFullPath(multiMembersFile);
 
         public List<Club> GetAllClubs()
@@ -53,7 +53,7 @@ namespace MidtermProjectFitnessCenter
                 {
                     string[] values = s.Split(",");
                     SingleClubMember deseralizeSingleClubMember = new SingleClubMember();
-                    deseralizeSingleClubMember.ID = Guid.Parse(values[0]);
+                    deseralizeSingleClubMember.Id = Guid.Parse(values[0]);
                     deseralizeSingleClubMember.Name = values[1];
                     deseralizeSingleClubMember.Club = values[2];
                     singleClubMembers.Add(deseralizeSingleClubMember);
@@ -72,11 +72,7 @@ namespace MidtermProjectFitnessCenter
                 while ((s = sr.ReadLine()) != null)
                 {
                     string[] values = s.Split(",");
-                    MultiClubMember deseralizeMultiClubMember = new MultiClubMember();
-                    
-                    deseralizeMultiClubMember.ID = Guid.Parse(values[0]);
-                    deseralizeMultiClubMember.Name = values[1];
-                    deseralizeMultiClubMember.MembershipPoints = int.Parse(values[2]);
+                    MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]));
                     multiClubMembers.Add(deseralizeMultiClubMember);
                 }
             }

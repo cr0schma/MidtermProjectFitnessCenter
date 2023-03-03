@@ -12,19 +12,21 @@ Console.WriteLine("\nSingle Club Members");
 DataAccess singleMembers = new();
 foreach (var singleMember in singleMembers.GetSingleClubMembers())
 {
-    Console.WriteLine($"{singleMember.ID.ToString()},{singleMember.Name},{singleMember.Club}");
+    Console.WriteLine($"{singleMember.Id.ToString()},{singleMember.Name},{singleMember.Club}");
 }
 
 Console.WriteLine("\nMulti-Club Members Members");
 DataAccess multiMembers = new();
 foreach (var multiMember in multiMembers.GetMultiClubMembers())
 {
-    Console.WriteLine($"{multiMember.ID.ToString()}, {multiMember.Name}, {multiMember.MembershipPoints}");
+    Console.WriteLine($"{multiMember.Id.ToString()}, {multiMember.Name}, {multiMember.MembershipPoints}");
 }
 
 Console.WriteLine("\nAll Club Members");
 DataAccess allMembers = new();
 foreach (var member in allMembers.GetAllMembers())
 {
-    Console.WriteLine($"{member.Name}");
+    Console.WriteLine($"{member.Id},{member.Name}");
 }
+
+// TODO: write ability to create new user and input to txt file
