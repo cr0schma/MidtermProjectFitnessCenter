@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MidtermProjectFitnessCenter
 {
-    public abstract class Members
+    public class Club
     {
-        public Guid ID { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
 
-        public abstract void CheckIn();
+        public override string ToString()
+        {
+            return $"{Name}||{Address}";
+        }
     }
 }
