@@ -29,4 +29,5 @@ foreach (var member in allMembers.GetAllMembers())
     Console.WriteLine($"{member.Id},{member.Name}");
 }
 
-// TODO: write ability to create new user and input to txt file
+SingleClubMember test = new(Guid.NewGuid(), "Rick Astley", "Anytime Fitness");
+DataAccess.AddSingleClubMember(test);

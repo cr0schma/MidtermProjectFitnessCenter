@@ -52,10 +52,7 @@ namespace MidtermProjectFitnessCenter
                 while ((s = sr.ReadLine()) != null)
                 {
                     string[] values = s.Split(",");
-                    SingleClubMember deseralizeSingleClubMember = new SingleClubMember();
-                    deseralizeSingleClubMember.Id = Guid.Parse(values[0]);
-                    deseralizeSingleClubMember.Name = values[1];
-                    deseralizeSingleClubMember.Club = values[2];
+                    SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2]);
                     singleClubMembers.Add(deseralizeSingleClubMember);
                 }
             }
@@ -97,5 +94,26 @@ namespace MidtermProjectFitnessCenter
             return allClubMembers;
         }
 
+        public static void AddSingleClubMember(SingleClubMember singleClubMember)
+        {
+            FileStream stream = null;
+            stream = new FileStream(singleMembersFilePath, FileMode.Append, FileAccess.Write);
+            
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                writer.WriteLine($"{singleClubMember.Id},{singleClubMember.Name},{singleClubMember.Club}");
+            }
+        }
+
+        public static void AddMultiClubMember(MultiClubMember multiClubMember)
+        {
+            FileStream stream = null;
+            stream = new FileStream(multiMembersFilePath, FileMode.Append, FileAccess.Write);
+
+            using (StreamWriter writer = new StreamWriter(stream))
+            {
+                writer.WriteLine($"{multiClubMember.Id},{multiClubMember.Name},{multiClubMember.MembershipPoints}");
+            }
+        }
     }
 }
