@@ -8,9 +8,9 @@ namespace MidtermProjectFitnessCenter
 {
     public abstract class Members
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-
+        public abstract Guid Id { get; set; }
+        public abstract string Name { get; set; }
+        
         public abstract void CheckIn();
     }
 }

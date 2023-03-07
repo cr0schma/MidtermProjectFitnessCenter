@@ -9,10 +9,23 @@ namespace MidtermProjectFitnessCenter
     public class SingleClubMember : Members
     {
         public string Club { get; set; }
+        public override Guid Id { get; set; }
+        public override string Name { get; set; }
+
+        public SingleClubMember(Guid _Id, string _Name, string _Club)
+        {
+            Id = _Id;
+            Name = _Name;
+            Club = _Club;
+        }
         public override void CheckIn()
         {
             
             
+        }
+        public override string ToString()
+        {
+            return $"{Id},{Name},{Club}";
         }
     }
 }
