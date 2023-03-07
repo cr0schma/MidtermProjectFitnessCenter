@@ -1,5 +1,42 @@
 ﻿using MidtermProjectFitnessCenter;
-Console.WriteLine("test");
+bool userPresent = false;
+Console.Write("Welcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
+
+string user = Console.ReadLine();
+if (!Validations.verifyUserInput(user))
+    return;
+
+if (!Validations.CheckUserAdmin(user))
+{
+    
+    DataAccess allMembers = new();
+    foreach (var member in allMembers.GetAllMembers())
+    {
+        if (member.Name.ToLower() == user.ToLower())
+        {
+            userPresent = true; 
+            break;
+
+        }
+        
+    }
+}   
+
+Console.WriteLine("Would You like to select a club (y/n)?");
+string UserAnswer = Console.ReadLine();
+
+if (!Validations.verifyUserInput(UserAnswer))
+{
+    return;
+}
+
+else if (UserAnswer.ToLower() == "y")
+{
+    Console.WriteLine("testing");
+    return;
+}
+
+
 // Get All Clubs
 /*DataAccess clubs = new();
 Console.WriteLine("All Clubs");
