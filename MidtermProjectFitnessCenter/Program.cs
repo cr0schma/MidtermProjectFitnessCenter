@@ -1,70 +1,40 @@
 ﻿using MidtermProjectFitnessCenter;
-using System.Globalization;
-
+bool userPresent = false;
 Console.Write("Welcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
+
 string user = Console.ReadLine();
-if (user != "admin")
-{
+if (!Validations.verifyUserInput(user))
+    return;
 
-}
-else if (user == "admin")
+if (!Validations.CheckUserAdmin(user))
 {
-    bool adminPlayAgain = true;
-    while (adminPlayAgain) 
+    
+    DataAccess allMembers = new();
+    foreach (var member in allMembers.GetAllMembers())
     {
-        Console.Write("Password: ");
-        int adminPassword = int.Parse(Console.ReadLine());
-        if (adminPassword == 123)
+        if (member.Name.ToLower() == user.ToLower())
         {
-            // Set console to different color so staff knows they're logged in as admin
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Clear();
-
-            Console.WriteLine("Attention! Administrative rights enabled!\n\n" +
-                "Please choose from the following:\n" +
-                "1. Add member\n" +
-                "2. Remove member\n" +
-                "3. Display member information");
-            adminPlayAgain = false;
-
+            userPresent = true; 
+            break;
 
         }
-        else
-        {
-            Console.Write("Invalid password, try again? (y/n): ");
-            string adminAnswer = Console.ReadLine();
-            if (adminAnswer == "y") { } else { adminPlayAgain = false; }
-        }
+        
     }
+}   
+
+Console.WriteLine("Would You like to select a club (y/n)?");
+string UserAnswer = Console.ReadLine();
+
+if (!Validations.verifyUserInput(UserAnswer))
+{
+    return;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+else if (UserAnswer.ToLower() == "y")
+{
+    Console.WriteLine("testing");
+    return;
+}
 
 
 // Get All Clubs
