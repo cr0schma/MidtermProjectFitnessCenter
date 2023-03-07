@@ -24,7 +24,6 @@ namespace MidtermProjectFitnessCenter
 
         public List<Club> GetAllClubs()
         {
-            // How do we turn the text file back into objects (deserialize)?
             List<Club> clubs = new List<Club>();
 
             using (StreamReader sr = File.OpenText(clubsFilePath))

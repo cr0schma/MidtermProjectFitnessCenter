@@ -9,6 +9,8 @@ namespace MidtermProjectFitnessCenter
 {
     public class MultiClubMember : Members
     {
+        public override Guid Id { get; set; }
+        public override string Name { get; set; }
         public int MembershipPoints { get; set; }
 
         public MultiClubMember(Guid _Id, string _Name, int _MembershipPoints)

@@ -1,9 +1,9 @@
 ﻿using MidtermProjectFitnessCenter;
-
+Console.WriteLine("test");
 // Get All Clubs
-DataAccess clubs = new();
+/*DataAccess clubs = new();
 Console.WriteLine("All Clubs");
-foreach(var club in clubs.GetAllClubs())
+foreach (var club in clubs.GetAllClubs())
 {
     Console.WriteLine($"{club.Name},{club.Address}");
 }
@@ -30,4 +30,4 @@ foreach (var member in allMembers.GetAllMembers())
 }
 
 SingleClubMember test = new(Guid.NewGuid(), "Rick Astley", "Anytime Fitness");
-DataAccess.AddSingleClubMember(test);
+DataAccess.AddSingleClubMember(test);*/
