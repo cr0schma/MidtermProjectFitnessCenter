@@ -39,5 +39,53 @@ namespace MidtermProjectFitnessCenter
             }
             return useranswer;
         }
+
+        public static string GetUserType(Guid Id)
+        {
+            string userType = string.Empty;
+
+            DataAccess single = new();
+            DataAccess multi = new();
+
+            foreach (var member in single.GetSingleClubMembers())
+            {
+                if (member.Id == Id)
+                {
+                    userType = "single";
+                }
+            }
+            foreach (var member in multi.GetMultiClubMembers())
+            {
+                if (member.Id == Id)
+                {
+                    userType = "multi";
+                }
+            }
+            return userType;
+        }
+
+        public static string GetUserType(string Name)
+        {
+            string userType = string.Empty;
+
+            DataAccess single = new();
+            DataAccess multi = new();
+
+            foreach (var member in single.GetSingleClubMembers())
+            {
+                if (member.Name == Name)
+                {
+                    userType = "single";
+                }
+            }
+            foreach (var member in multi.GetMultiClubMembers())
+            {
+                if (member.Name == Name)
+                {
+                    userType = "multi";
+                }
+            }
+            return userType;
+        }
     }
 }
