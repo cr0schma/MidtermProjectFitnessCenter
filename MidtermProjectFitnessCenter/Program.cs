@@ -1,6 +1,7 @@
 ﻿using MidtermProjectFitnessCenter;
 using System.Security;
 using System.Xml.Schema;
+using static System.Reflection.Metadata.BlobBuilder;
 
 bool userPresent = false;
 
@@ -68,6 +69,7 @@ if (Validations.CheckUserAdmin(user))
                 "Select: ");
                 int adminChoice = int.Parse(Console.ReadLine());
                 bool choicePlayAgain = true;
+                bool isValidNum = true;
 
                 if (adminChoice == 1)
                 {
@@ -122,14 +124,17 @@ if (Validations.CheckUserAdmin(user))
 
                     if (userType == "single")
                     {
+                        List<SingleClubMember> userName = DataAccess.GetSingleClubMember(allMembers.GetAllMembers()[memberToRemove - 1].Id);
                         DataAccess.RemoveSingleClubMember(allMembers.GetAllMembers()[memberToRemove - 1].Id);
+                        Console.WriteLine($"Removed member: {userName[0].Name}");
                     }
 
                     if (userType == "multi")
                     {
+                        List<MultiClubMember> userName = DataAccess.GetMultiClubMember(allMembers.GetAllMembers()[memberToRemove - 1].Id);
                         DataAccess.RemoveMultiClubMember(allMembers.GetAllMembers()[memberToRemove - 1].Id);
+                        Console.WriteLine($"Removed member: {userName[0].Name}");
                     }
-
                 }
                 else if (adminChoice == 3)
                 {
@@ -144,7 +149,6 @@ if (Validations.CheckUserAdmin(user))
 
                     Console.Write("Select user for detailed information or press enter to return to menu: ");
                     string detailedUser = Console.ReadLine();
-                    bool isValidNum;
                     isValidNum = int.TryParse(detailedUser, out int num);
                     if (isValidNum)
                     {
@@ -169,8 +173,8 @@ if (Validations.CheckUserAdmin(user))
                     string adminChoiceAnswer = Console.ReadLine();
                     if (adminChoiceAnswer == "y") { choicePlayAgain = false; } else { adminPlayAgain = false; choicePlayAgain = false; }
                 }
-                
-                if (choicePlayAgain == true)
+
+                if (choicePlayAgain == true && isValidNum == true)
                 {
                     Console.Write("\nPerform an additional action? (y/n): ");
                     string playAgainAnswer = Console.ReadLine();
