@@ -29,7 +29,7 @@ namespace MidtermProjectFitnessCenter
                 List<SingleClubMember> singleUser = DataAccess.GetSingleClubMember(Name);
                 if (singleUser[0].Club == club.Name)
                 {
-                    Console.WriteLine($"Welcome to {club.Name}");
+                    Console.WriteLine($"Welcome to {club.Name}!");
                     memberFound = true;
                 }
                 // Check if they want to to re-enter if member not found
@@ -76,6 +76,9 @@ namespace MidtermProjectFitnessCenter
                     }
                 }
             }
+            Console.Write("\nPress any key to return to menu...");
+            Console.ReadKey();
+            Console.Clear();
         }
         public override string ToString()
         {
