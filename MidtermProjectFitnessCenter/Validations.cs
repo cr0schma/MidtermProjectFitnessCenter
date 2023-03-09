@@ -22,22 +22,27 @@ namespace MidtermProjectFitnessCenter
         {
             
             if (useranswer.ToLower() == "admin")
-            {
-                
+            {                
                 return true;
             }
             return false;
         }
 
-        public static string GetUserDetails(string useranswer)
+        
+        public static List<Club> GetSingleMemberClubNames()
         {
-            DataAccess allMembers = new();
-            foreach (var member in allMembers.GetAllMembers())
+            List<Club> list = new List<Club>();
+           
+            DataAccess SingleMemberClubs = new();
+            foreach (var clubname in SingleMemberClubs.GetAllClubs())
             {
-               
-                Console.WriteLine("userPresent");
+                list.Add(clubname);
+                
             }
-            return useranswer;
+
+            // Add multi member option
+            list.Add(new Club { Name = "Multi Club Member" });
+            return list;
         }
     }
 }

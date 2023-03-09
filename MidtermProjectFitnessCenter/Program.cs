@@ -8,10 +8,11 @@ if (!Validations.verifyUserInput(user))
 
 if (!Validations.CheckUserAdmin(user))
 {
-    
+   
     DataAccess allMembers = new();
     foreach (var member in allMembers.GetAllMembers())
     {
+        
         if (member.Name.ToLower() == user.ToLower())
         {
             userPresent = true; 
@@ -20,21 +21,47 @@ if (!Validations.CheckUserAdmin(user))
         }
         
     }
-}   
+    
+    if (!userPresent)
+    {
+        Console.WriteLine("This Member is not present: Please contact the Customer support");
+        return;
+    }
+        
 
-Console.WriteLine("Would You like to select a club (y/n)?");
-string UserAnswer = Console.ReadLine();
+    Console.Write("Would You like to select a club (y/n)?: ");
+    string UserAnswer = Console.ReadLine();
 
-if (!Validations.verifyUserInput(UserAnswer))
-{
-    return;
+    if (!Validations.verifyUserInput(UserAnswer))
+    {
+        Console.WriteLine("Slected option is not correct: Please try again later!");
+        return;
+    }
+
+    else if (UserAnswer.ToLower() == "y")
+    {
+        Console.WriteLine("Please select from below options");
+       
+        List<Club> clubs = new();
+        clubs = Validations.GetSingleMemberClubNames();
+
+        int Count = 0;
+        foreach (var club in clubs)
+        {
+            Count = Count + 1;
+            Console.WriteLine($"{Count}:  {club.Name}");
+        }
+        
+
+        return;
+    }
+
 }
 
-else if (UserAnswer.ToLower() == "y")
-{
-    Console.WriteLine("testing");
-    return;
-}
+
+
+
+
 
 
 // Get All Clubs
