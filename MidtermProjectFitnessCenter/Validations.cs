@@ -87,5 +87,19 @@ namespace MidtermProjectFitnessCenter
             }
             return userType;
         }
+
+        public static List<Club> GetAllClubNames()
+        {
+            List<Club> list = new List<Club>();
+
+            DataAccess SingleMemberClubs = new();
+            foreach (var clubname in SingleMemberClubs.GetAllClubs())
+            {
+                list.Add(clubname);
+
+            }
+           
+            return list;
+        }
     }
 }

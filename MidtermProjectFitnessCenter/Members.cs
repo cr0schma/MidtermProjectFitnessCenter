@@ -11,6 +11,6 @@ namespace MidtermProjectFitnessCenter
         public abstract Guid Id { get; set; }
         public abstract string Name { get; set; }
         
-        public abstract void CheckIn();
+        public abstract void CheckIn(Club club);
     }
 }

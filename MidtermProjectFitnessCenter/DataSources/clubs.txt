@@ -1,4 +1,4 @@
-﻿Anytime Fitness, 123
-Planet Fitness, 456 
-Building Your Temple Fitness, 789
-Great Lakes Athletic Club, 101112
+﻿Anytime Fitness, 123 Gains St
+Planet Fitness, 456 BornToLift Alley
+Building Your Temple Fitness, 789 PumpYouUp Dr
+Great Lakes Athletic Club, 101112 NeverMissLegDay Ct
