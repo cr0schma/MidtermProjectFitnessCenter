@@ -43,6 +43,7 @@ if (!Validations.CheckUserAdmin(user))
         Console.WriteLine("Please select from below options");
        
         List<Club> clubs = new();
+
         clubs = Validations.GetSingleMemberClubNames();
 
         int Count = 0;
