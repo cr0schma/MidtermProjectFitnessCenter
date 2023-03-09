@@ -9,7 +9,7 @@ while (true)
     bool userPresent = false;
     Console.ForegroundColor = ConsoleColor.White;
     Console.BackgroundColor = ConsoleColor.Black;
-    Console.Write("\nWelcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
+    Console.Write("Welcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
     string user = Console.ReadLine();
 
     if (!Validations.verifyUserInput(user))
