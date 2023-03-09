@@ -22,26 +22,83 @@ namespace MidtermProjectFitnessCenter
         {
             
             if (useranswer.ToLower() == "admin")
-            {                
+            {
+                
                 return true;
             }
             return false;
         }
 
-        
+        public static string GetUserDetails(string useranswer)
+        {
+            DataAccess allMembers = new();
+            foreach (var member in allMembers.GetAllMembers())
+            {
+               
+                Console.WriteLine("userPresent");
+            }
+            return useranswer;
+        }
+
+        public static string GetUserType(Guid Id)
+        {
+            string userType = string.Empty;
+
+            DataAccess single = new();
+            DataAccess multi = new();
+
+            foreach (var member in single.GetSingleClubMembers())
+            {
+                if (member.Id == Id)
+                {
+                    userType = "single";
+                }
+            }
+            foreach (var member in multi.GetMultiClubMembers())
+            {
+                if (member.Id == Id)
+                {
+                    userType = "multi";
+                }
+            }
+            return userType;
+        }
+
+        public static string GetUserType(string Name)
+        {
+            string userType = string.Empty;
+
+            DataAccess single = new();
+            DataAccess multi = new();
+
+            foreach (var member in single.GetSingleClubMembers())
+            {
+                if (member.Name == Name)
+                {
+                    userType = "single";
+                }
+            }
+            foreach (var member in multi.GetMultiClubMembers())
+            {
+                if (member.Name == Name)
+                {
+                    userType = "multi";
+                }
+            }
+            return userType;
+        }
+
         public static List<Club> GetSingleMemberClubNames()
         {
             List<Club> list = new List<Club>();
-           
+
             DataAccess SingleMemberClubs = new();
             foreach (var clubname in SingleMemberClubs.GetAllClubs())
             {
                 list.Add(clubname);
-                
-            }
 
-            // Add multi member option
-            list.Add(new Club { Name = "Multi Club Member" });
+            }
+           
             return list;
         }
     }

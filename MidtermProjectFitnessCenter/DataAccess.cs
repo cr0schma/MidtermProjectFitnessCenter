@@ -58,6 +58,25 @@ namespace MidtermProjectFitnessCenter
             return singleClubMembers;
         }
 
+        public static List<SingleClubMember> GetSingleClubMember(Guid id)
+        {
+            List<SingleClubMember> singleClubMember = new List<SingleClubMember>();
+
+            using (StreamReader sr = File.OpenText(singleMembersFilePath))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(id.ToString())) {
+                        string[] values = s.Split(",");
+                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2]);
+                        singleClubMember.Add(deseralizeSingleClubMember);
+                    }
+                }
+            }
+            return singleClubMember;
+        }
+
         public List<MultiClubMember> GetMultiClubMembers()
         {
             List<MultiClubMember> multiClubMembers = new List<MultiClubMember>();
@@ -75,6 +94,25 @@ namespace MidtermProjectFitnessCenter
             return multiClubMembers;
         }
 
+        public static List<MultiClubMember> GetMultiClubMember(Guid id)
+        {
+            List<MultiClubMember> multiClubMember = new List<MultiClubMember>();
+
+            using (StreamReader sr = File.OpenText(multiMembersFilePath))
+            {
+                string s;
+                while ((s = sr.ReadLine()) != null)
+                {
+                    if (s.Contains(id.ToString()))
+                    {
+                        string[] values = s.Split(",");
+                        MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]));
+                        multiClubMember.Add(deseralizeMultiClubMember);
+                    }
+                }
+            }
+            return multiClubMember;
+        }
 
         public List<Members> GetAllMembers()
         {
@@ -114,5 +152,58 @@ namespace MidtermProjectFitnessCenter
                 writer.WriteLine($"{multiClubMember.Id},{multiClubMember.Name},{multiClubMember.MembershipPoints}");
             }
         }
+
+        public static void RemoveSingleClubMember(Guid id)
+        {
+            string[] arrLine = File.ReadAllLines(singleMembersFilePath);
+            int i = 0;
+            int line = 0;
+            foreach (string l in arrLine)
+            {
+                if (l.Contains(id.ToString()))
+                {
+                    line = i;
+                }
+                i++;
+            }
+            arrLine[line] = "removeme";
+            File.WriteAllLines(singleMembersFilePath, arrLine);
+
+            var tempFile = Path.GetTempFileName();
+            var linesToKeep = File.ReadLines(singleMembersFilePath).Where(l => l != "removeme");
+
+            File.WriteAllLines(tempFile, linesToKeep);
+
+            File.Delete(singleMembersFilePath);
+            File.Move(tempFile, singleMembersFilePath);
+
+        }
+
+        public static void RemoveMultiClubMember(Guid id)
+        {
+            string[] arrLine = File.ReadAllLines(multiMembersFilePath);
+            int i = 0;
+            int line = 0;
+            foreach (string l in arrLine)
+            {
+                if (l.Contains(id.ToString()))
+                {
+                    line = i;
+                }
+                i++;
+            }
+            arrLine[line] = "removeme";
+            File.WriteAllLines(multiMembersFilePath, arrLine);
+
+            var tempFile = Path.GetTempFileName();
+            var linesToKeep = File.ReadLines(multiMembersFilePath).Where(l => l != "removeme");
+
+            File.WriteAllLines(tempFile, linesToKeep);
+
+            File.Delete(multiMembersFilePath);
+            File.Move(tempFile, multiMembersFilePath);
+
+        }
+
     }
 }
