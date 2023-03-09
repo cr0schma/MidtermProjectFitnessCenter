@@ -12,6 +12,7 @@ namespace MidtermProjectFitnessCenter
         public override Guid Id { get; set; }
         public override string Name { get; set; }
         public int MembershipPoints { get; set; }
+        public int Fees { get; set; }
 
         public MultiClubMember(Guid _Id, string _Name, int _MembershipPoints)
         {
@@ -20,10 +21,11 @@ namespace MidtermProjectFitnessCenter
             MembershipPoints = _MembershipPoints;
         }
 
-        public override void CheckIn()
+        public override void CheckIn(Club club)
         {
-            // add membership points here...
-            // potentially a for each loop... 
+            int currentMemberShipPoints = MembershipPoints;
+            int futureMemberShipPoints = MembershipPoints + 10;
+            Console.WriteLine($"Membership points have increased from {currentMemberShipPoints} to {futureMemberShipPoints}");
         }
 
         public override string ToString()

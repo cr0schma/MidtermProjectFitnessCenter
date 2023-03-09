@@ -14,6 +14,7 @@ if (!Validations.verifyUserInput(user))
     return;
 }
 
+// User Login
 if (!Validations.CheckUserAdmin(user))
 {
 
@@ -40,8 +41,8 @@ if (!Validations.CheckUserAdmin(user))
     if (userclubType == "single")
     {
         List<Club> clubs = new();
-
-        clubs = Validations.GetSingleMemberClubNames();
+        DataAccess singleClubAnswer = new();
+        clubs = Validations.GetAllClubNames();
 
         int Count = 0;
         foreach (var club in clubs)
@@ -53,37 +54,66 @@ if (!Validations.CheckUserAdmin(user))
         Console.Write("Please select the club you belong to: ");
 
         int UserAnswer = int.Parse(Console.ReadLine());
-        
+        try
+        {
+            string singleClubAnswerString = singleClubAnswer.GetAllClubs()[UserAnswer - 1].Name;
+
+            // Get user info
+            List<SingleClubMember> singleUser = DataAccess.GetSingleClubMember(user);
+
+            // Creat club object and fill it with club that user belongs to
+            Club singleClub = new();
+            singleClub.Name = singleClubAnswerString;
+
+            // Call CheckIn method to see if they belong to that club
+            SingleClubMember singleClubMember = new(singleUser[0].Id, singleUser[0].Name, singleUser[0].Club);
+            singleClubMember.CheckIn(singleClub);
+        }
+        catch
+        {
+            Console.WriteLine("Wrong selection");
+        }
 
     }
     else if (userclubType == "multi")
     {
-
-    }
-    
-
-    /*else if (UserAnswer.ToLower() == "y")
-    {
-        Console.WriteLine("Please select from below options");
-
         List<Club> clubs = new();
-
-        clubs = Validations.GetSingleMemberClubNames();
+        DataAccess multiClubAnswer = new();
+        clubs = Validations.GetAllClubNames();
 
         int Count = 0;
         foreach (var club in clubs)
         {
             Count = Count + 1;
-            Console.WriteLine($"{Count}:  {club.Name}");
+            Console.WriteLine($"{Count}: {club.Name}");
         }
 
+        Console.Write("Please select a club to check into: ");
 
-        return;
-    }*/
+        int UserAnswer = int.Parse(Console.ReadLine());
+        try
+        {
+            string multiClubAnswerString = multiClubAnswer.GetAllClubs()[UserAnswer - 1].Name;
 
+            // Get user info
+            List<MultiClubMember> multiUser = DataAccess.GetMultiClubMember(user);
+
+            // Creat club object and fill it with club that user belongs to
+            Club multiClub = new();
+            multiClub.Name = multiClubAnswerString;
+
+            // Call CheckIn method to see if they belong to that club
+            MultiClubMember multiClubMember = new(multiUser[0].Id, multiUser[0].Name, multiUser[0].MembershipPoints);
+            multiClubMember.CheckIn(multiClub);
+        }
+        catch
+        {
+            Console.WriteLine("Wrong selection");
+        }
+    }
 }
 
-
+// Admin Login
 if (Validations.CheckUserAdmin(user))
 {
     bool adminPasswordPlayAgain = true;
@@ -123,6 +153,7 @@ if (Validations.CheckUserAdmin(user))
                 "1. Add member\n" +
                 "2. Remove member\n" +
                 "3. Display member information\n" +
+                "4. Generate bill of fees" +
                 "Select: ");
                 int adminChoice = int.Parse(Console.ReadLine());
                 bool choicePlayAgain = true;
@@ -224,6 +255,10 @@ if (Validations.CheckUserAdmin(user))
                         }
                     }
                 }
+                else if (adminChoice == 4)
+                {
+                    // TODO: Ashwath
+                }
                 else
                 {
                     Console.Write("\nInvalid selection, try again? (y/n): ");
@@ -248,35 +283,3 @@ if (Validations.CheckUserAdmin(user))
         }
     }
 }
-
-// Get All Clubs
-/*DataAccess clubs = new();
-Console.WriteLine("All Clubs");
-foreach (var club in clubs.GetAllClubs())
-{
-    Console.WriteLine($"{club.Name},{club.Address}");
-}
-
-Console.WriteLine("\nSingle Club Members");
-DataAccess singleMembers = new();
-foreach (var singleMember in singleMembers.GetSingleClubMembers())
-{
-    Console.WriteLine($"{singleMember.Id.ToString()},{singleMember.Name},{singleMember.Club}");
-}
-
-Console.WriteLine("\nMulti-Club Members Members");
-DataAccess multiMembers = new();
-foreach (var multiMember in multiMembers.GetMultiClubMembers())
-{
-    Console.WriteLine($"{multiMember.Id.ToString()}, {multiMember.Name}, {multiMember.MembershipPoints}");
-}
-
-Console.WriteLine("\nAll Club Members");
-DataAccess allMembers = new();
-foreach (var member in allMembers.GetAllMembers())
-{
-    Console.WriteLine($"{member.Id},{member.Name}");
-}
-
-SingleClubMember test = new(Guid.NewGuid(), "Rick Astley", "Anytime Fitness");
-DataAccess.AddSingleClubMember(test);*/

@@ -88,7 +88,7 @@ namespace MidtermProjectFitnessCenter
             return userType;
         }
 
-        public static List<Club> GetSingleMemberClubNames()
+        public static List<Club> GetAllClubNames()
         {
             List<Club> list = new List<Club>();
 
