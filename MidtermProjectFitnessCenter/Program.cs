@@ -68,7 +68,9 @@ while (true)
                 singleClub.Name = singleClubAnswerString;
 
                 // Call CheckIn method to see if they belong to that club
+
                 SingleClubMember singleClubMember = new(singleUser[0].Id, singleUser[0].Name, singleUser[0].Club, singleUser[0].Fees);
+
                 singleClubMember.CheckIn(singleClub);
             }
             catch
@@ -104,7 +106,9 @@ while (true)
                 multiClub.Name = multiClubAnswerString;
 
                 // Call CheckIn method to see if they belong to that club
+
                 MultiClubMember multiClubMember = new(multiUser[0].Id, multiUser[0].Name, multiUser[0].MembershipPoints, multiUser[0].Fees);
+
                 multiClubMember.CheckIn(multiClub);
             }
             catch
@@ -170,7 +174,9 @@ while (true)
                         if (singleOrMulti.ToLower() == "m")
                         {
                             int defaultPoints = 1000;
+
                             MultiClubMember newMultiClubMember = new(Guid.NewGuid(), memberName, defaultPoints, 0.0m);
+
                             DataAccess.AddMultiClubMember(newMultiClubMember);
 
                             Console.WriteLine($"Added {memberName} with {defaultPoints} points");
@@ -189,7 +195,9 @@ while (true)
                             Console.Write("\nClub Assignment: ");
                             int clubAssignment = int.Parse(Console.ReadLine());
 
+
                             SingleClubMember newSingleClubMember = new(Guid.NewGuid(), memberName, clubs.GetAllClubs()[clubAssignment - 1].Name,0.0m);
+
                             DataAccess.AddSingleClubMember(newSingleClubMember);
 
                             Console.WriteLine($"Added {memberName} and assigned to {clubs.GetAllClubs()[clubAssignment - 1].Name}");
@@ -202,7 +210,9 @@ while (true)
                         DataAccess allMembers = new();
                         foreach (var member in allMembers.GetAllMembers())
                         {
+
                             Console.WriteLine($"{i}. {member.Name}");
+
                             i++;
                         }
                         Console.Write("\nMember to remove: ");
@@ -231,7 +241,9 @@ while (true)
                         DataAccess allMembers = new();
                         foreach (var member in allMembers.GetAllMembers())
                         {
+
                             Console.WriteLine($"{i}. {member.Name}");
+
                             i++;
                         }
 
@@ -261,6 +273,7 @@ while (true)
                     }
                     else if (adminChoice == 4)
                     {
+
                         int i = 1;
                         Console.WriteLine("\nCurrent Members: ");
                         DataAccess allMembers = new();
@@ -293,6 +306,9 @@ while (true)
                         {
                             Console.Clear();
                         }
+
+                        
+
                     }
                     else if (adminChoice == 0)
                     {

@@ -11,7 +11,9 @@ namespace MidtermProjectFitnessCenter
         public string Club { get; set; }
         public override Guid Id { get; set; }
         public override string Name { get; set; }
+
         public decimal Fees { get; set; }
+
 
         public SingleClubMember(Guid _Id, string _Name, string _Club, decimal _Fees)
         {
@@ -66,7 +68,9 @@ namespace MidtermProjectFitnessCenter
                         singleClub.Name = singleClubAnswerString;
 
                         // Call CheckIn method to see if they belong to that club
+
                         SingleClubMember singleClubMember = new(singleUser[0].Id, singleUser[0].Name, singleUser[0].Club, singleUser[0].Fees);
+
                         singleClubMember.CheckIn(singleClub);
                         memberFound = true;
                     }
