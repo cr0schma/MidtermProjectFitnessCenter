@@ -51,8 +51,11 @@ namespace MidtermProjectFitnessCenter
                 while ((s = sr.ReadLine()) != null)
                 {
                     string[] values = s.Split(",");
-                    SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2]);
+                    SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]));
                     singleClubMembers.Add(deseralizeSingleClubMember);
+                    
+
+
                 }
             }
             return singleClubMembers;
@@ -69,7 +72,7 @@ namespace MidtermProjectFitnessCenter
                 {
                     if (s.Contains(id.ToString())) {
                         string[] values = s.Split(",");
-                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2]);
+                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]));
                         singleClubMember.Add(deseralizeSingleClubMember);
                     }
                 }
@@ -89,7 +92,7 @@ namespace MidtermProjectFitnessCenter
                     if (s.Contains(name))
                     {
                         string[] values = s.Split(",");
-                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2]);
+                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]));
                         singleClubMember.Add(deseralizeSingleClubMember);
                     }
                 }
@@ -107,7 +110,7 @@ namespace MidtermProjectFitnessCenter
                 while ((s = sr.ReadLine()) != null)
                 {
                     string[] values = s.Split(",");
-                    MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]));
+                    MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]), decimal.Parse(values[3]));
                     multiClubMembers.Add(deseralizeMultiClubMember);
                 }
             }
@@ -126,7 +129,7 @@ namespace MidtermProjectFitnessCenter
                     if (s.Contains(id.ToString()))
                     {
                         string[] values = s.Split(",");
-                        MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]));
+                        MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]), decimal.Parse(values[3]));
                         multiClubMember.Add(deseralizeMultiClubMember);
                     }
                 }
@@ -146,7 +149,7 @@ namespace MidtermProjectFitnessCenter
                     if (s.Contains(name))
                     {
                         string[] values = s.Split(",");
-                        MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]));
+                        MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]), decimal.Parse(values[3]));
                         multiClubMember.Add(deseralizeMultiClubMember);
                     }
                 }

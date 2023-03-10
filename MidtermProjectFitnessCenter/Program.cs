@@ -9,7 +9,7 @@ while (true)
     bool userPresent = false;
     Console.ForegroundColor = ConsoleColor.White;
     Console.BackgroundColor = ConsoleColor.Black;
-    Console.Write("\nWelcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
+    Console.Write("Welcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
     string user = Console.ReadLine();
 
     if (!Validations.verifyUserInput(user))
@@ -68,7 +68,7 @@ while (true)
                 singleClub.Name = singleClubAnswerString;
 
                 // Call CheckIn method to see if they belong to that club
-                SingleClubMember singleClubMember = new(singleUser[0].Id, singleUser[0].Name, singleUser[0].Club);
+                SingleClubMember singleClubMember = new(singleUser[0].Id, singleUser[0].Name, singleUser[0].Club, singleUser[0].Fees);
                 singleClubMember.CheckIn(singleClub);
             }
             catch
@@ -104,7 +104,7 @@ while (true)
                 multiClub.Name = multiClubAnswerString;
 
                 // Call CheckIn method to see if they belong to that club
-                MultiClubMember multiClubMember = new(multiUser[0].Id, multiUser[0].Name, multiUser[0].MembershipPoints);
+                MultiClubMember multiClubMember = new(multiUser[0].Id, multiUser[0].Name, multiUser[0].MembershipPoints, multiUser[0].Fees);
                 multiClubMember.CheckIn(multiClub);
             }
             catch
@@ -170,7 +170,7 @@ while (true)
                         if (singleOrMulti.ToLower() == "m")
                         {
                             int defaultPoints = 1000;
-                            MultiClubMember newMultiClubMember = new(Guid.NewGuid(), memberName, defaultPoints);
+                            MultiClubMember newMultiClubMember = new(Guid.NewGuid(), memberName, defaultPoints, 0.0m);
                             DataAccess.AddMultiClubMember(newMultiClubMember);
 
                             Console.WriteLine($"Added {memberName} with {defaultPoints} points");
@@ -189,7 +189,7 @@ while (true)
                             Console.Write("\nClub Assignment: ");
                             int clubAssignment = int.Parse(Console.ReadLine());
 
-                            SingleClubMember newSingleClubMember = new(Guid.NewGuid(), memberName, clubs.GetAllClubs()[clubAssignment - 1].Name);
+                            SingleClubMember newSingleClubMember = new(Guid.NewGuid(), memberName, clubs.GetAllClubs()[clubAssignment - 1].Name,0.0m);
                             DataAccess.AddSingleClubMember(newSingleClubMember);
 
                             Console.WriteLine($"Added {memberName} and assigned to {clubs.GetAllClubs()[clubAssignment - 1].Name}");
@@ -202,7 +202,7 @@ while (true)
                         DataAccess allMembers = new();
                         foreach (var member in allMembers.GetAllMembers())
                         {
-                            Console.WriteLine($"{i}. {member.Id},{member.Name}");
+                            Console.WriteLine($"{i}. {member.Name}");
                             i++;
                         }
                         Console.Write("\nMember to remove: ");
@@ -231,7 +231,7 @@ while (true)
                         DataAccess allMembers = new();
                         foreach (var member in allMembers.GetAllMembers())
                         {
-                            Console.WriteLine($"{i}. {member.Id},{member.Name}");
+                            Console.WriteLine($"{i}. {member.Name}");
                             i++;
                         }
 
@@ -261,7 +261,38 @@ while (true)
                     }
                     else if (adminChoice == 4)
                     {
-                        // TODO: Ashwath
+                        int i = 1;
+                        Console.WriteLine("\nCurrent Members: ");
+                        DataAccess allMembers = new();
+                        foreach (var member in allMembers.GetAllMembers())
+                        {
+                            Console.WriteLine($"{i}. {member.Name}");
+                            i++;
+                        }
+
+                        Console.Write("Select user for fees or press enter to return to menu: ");
+                        string detailedUser = Console.ReadLine();
+                        isValidNum = int.TryParse(detailedUser, out int num);
+                        if (isValidNum)
+                        {
+                            string userType = Validations.GetUserType(allMembers.GetAllMembers()[num - 1].Id);
+
+                            if (userType == "single")
+                            {
+                                List<SingleClubMember> singleInfo = DataAccess.GetSingleClubMember(allMembers.GetAllMembers()[num - 1].Id);
+                                Console.WriteLine($"\nName: {singleInfo[0].Name}\nFees: ${singleInfo[0].Fees}");
+                            }
+
+                            if (userType == "multi")
+                            {
+                                List<MultiClubMember> multiInfo = DataAccess.GetMultiClubMember(allMembers.GetAllMembers()[num - 1].Id);
+                                Console.WriteLine($"\nName: {multiInfo[0].Name}\nPoints: {multiInfo[0].MembershipPoints}\nFees: ${multiInfo[0].Fees}");
+                            }
+                        }
+                        if (!isValidNum)
+                        {
+                            Console.Clear();
+                        }
                     }
                     else if (adminChoice == 0)
                     {

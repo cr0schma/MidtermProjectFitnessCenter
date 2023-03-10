@@ -12,13 +12,14 @@ namespace MidtermProjectFitnessCenter
         public override Guid Id { get; set; }
         public override string Name { get; set; }
         public int MembershipPoints { get; set; }
-        public int Fees { get; set; }
+        public decimal Fees { get; set; }
 
-        public MultiClubMember(Guid _Id, string _Name, int _MembershipPoints)
+        public MultiClubMember(Guid _Id, string _Name, int _MembershipPoints, decimal _Fees)
         {
             Id = _Id;
             Name = _Name;
             MembershipPoints = _MembershipPoints;
+            Fees = _Fees;
         }
 
         public override void CheckIn(Club club)
@@ -29,7 +30,7 @@ namespace MidtermProjectFitnessCenter
 
             // remove and add user to apply new points
             DataAccess.RemoveMultiClubMember(Id);
-            MultiClubMember updateMemberPoints = new(Id, Name, futureMemberShipPoints);
+            MultiClubMember updateMemberPoints = new(Id, Name, futureMemberShipPoints, Fees);
             DataAccess.AddMultiClubMember(updateMemberPoints);
 
             Console.Write("\nPress any key to return to menu...");
