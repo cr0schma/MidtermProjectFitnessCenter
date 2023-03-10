@@ -266,7 +266,16 @@ while (true)
                             if (userType == "single")
                             {
                                 List<SingleClubMember> singleInfo = DataAccess.GetSingleClubMember(allMembers.GetAllMembers()[num - 1].Id);
-                                Console.WriteLine($"\nID: {singleInfo[0].Id}\nName: {singleInfo[0].Name}\nClub: {singleInfo[0].Club}");
+                                if (singleInfo[0].Name == "Rick Astley")
+                                {
+                                    Validations.OpenBrowser("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+                                    Console.WriteLine("\nYou just got Rickrolled!");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"\nID: {singleInfo[0].Id}\nName: {singleInfo[0].Name}\nClub: {singleInfo[0].Club}");
+                                }
+                                
                             }
 
                             if (userType == "multi")
