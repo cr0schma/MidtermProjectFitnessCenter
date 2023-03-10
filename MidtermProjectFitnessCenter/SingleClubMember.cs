@@ -25,6 +25,7 @@ namespace MidtermProjectFitnessCenter
         public override void CheckIn(Club club)
         {
             bool memberFound = false;
+            bool sleep = false;
             string enterAgain;
             while (!memberFound)
             {
@@ -44,6 +45,7 @@ namespace MidtermProjectFitnessCenter
                         memberFound = true;
                     else if (enterAgain == "y")
                     {
+                        Console.Clear();
                         List<Club> clubs = new();
                         DataAccess singleClubAnswer = new();
                         clubs = Validations.GetAllClubNames();
@@ -73,6 +75,7 @@ namespace MidtermProjectFitnessCenter
 
                         singleClubMember.CheckIn(singleClub);
                         memberFound = true;
+                        sleep = true;
                     }
                     else
                     {
@@ -80,10 +83,17 @@ namespace MidtermProjectFitnessCenter
                         memberFound = true;
                     }
                 }
+                if (!memberFound && sleep)
+                {
+                    Thread.Sleep(3000);
+                    Console.Clear();
+                }
             }
-            Console.Write("\nPress any key to return to menu...");
-            Console.ReadKey();
-            Console.Clear();
+            if (memberFound && !sleep)
+            {
+                Thread.Sleep(3000);
+                Console.Clear();
+            }
         }
         public override string ToString()
         {

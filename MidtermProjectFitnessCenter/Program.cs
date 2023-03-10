@@ -7,6 +7,7 @@ using static System.Reflection.Metadata.BlobBuilder;
 while (true)
 {
     bool userPresent = false;
+    bool emptySpace = false;
     Console.ForegroundColor = ConsoleColor.White;
     Console.BackgroundColor = ConsoleColor.Black;
     Console.Write("Welcome to Grand Circus Gains\nPlease Enter Your Name to Log In: ");
@@ -14,8 +15,10 @@ while (true)
 
     if (!Validations.verifyUserInput(user))
     {
-        Console.WriteLine("Please enter a valid name");
-        return;
+        Console.WriteLine("Invalid entry, please enter your name.");
+        emptySpace= true;
+        Thread.Sleep(3000);
+        Console.Clear();
     }
 
     // User Login
@@ -33,13 +36,15 @@ while (true)
             }
         }
 
-        if (!userPresent)
+        if (!userPresent && !emptySpace)
         {
             Console.WriteLine("This Member is not present: Please contact customer support");
-            return;
+            //return;
+            Thread.Sleep(3000);
+            Console.Clear();
         }
 
-        var userclubType = Validations.GetUserType(user);
+        var userclubType = Validations.GetUserType(user.ToLower());
         if (userclubType == "single")
         {
             List<Club> clubs = new();
@@ -60,7 +65,7 @@ while (true)
                 string singleClubAnswerString = singleClubAnswer.GetAllClubs()[UserAnswer - 1].Name;
 
                 // Get user info
-                List<SingleClubMember> singleUser = DataAccess.GetSingleClubMember(user);
+                List<SingleClubMember> singleUser = DataAccess.GetSingleClubMember(user.ToLower());
 
                 // Creat club object and fill it with club that user belongs to
                 Club singleClub = new();
@@ -74,7 +79,7 @@ while (true)
             }
             catch
             {
-                Console.WriteLine("Wrong selection");
+                Console.WriteLine("Invalid selection, please try again.");
                 Thread.Sleep(3000);
             }
             Console.Clear();
@@ -94,7 +99,7 @@ while (true)
 
             Console.Write("Please select a club to check into: ");
 
-            if (!Validations.verifyUserInput(user))
+            if (!Validations.verifyUserInput(user.ToLower()))
             {
                 Console.WriteLine("Please enter a valid name");
                 return;
@@ -106,7 +111,7 @@ while (true)
                 string multiClubAnswerString = multiClubAnswer.GetAllClubs()[UserAnswer - 1].Name;
 
                 // Get user info
-                List<MultiClubMember> multiUser = DataAccess.GetMultiClubMember(user);
+                List<MultiClubMember> multiUser = DataAccess.GetMultiClubMember(user.ToLower());
 
                 // Creat club object and fill it with club that user belongs to
                 Club multiClub = new();
@@ -120,7 +125,7 @@ while (true)
             }
             catch
             {
-                Console.WriteLine("Wrong selection");
+                Console.WriteLine("Invalid selection, please try again.");
                 Thread.Sleep(3000);
             }
             Console.Clear();
@@ -184,7 +189,7 @@ while (true)
                         {
                             int defaultPoints = 1000;
 
-                            MultiClubMember newMultiClubMember = new(Guid.NewGuid(), memberName, defaultPoints, 0.0m);
+                            MultiClubMember newMultiClubMember = new(Guid.NewGuid(), memberName, defaultPoints, 0.00m);
 
                             DataAccess.AddMultiClubMember(newMultiClubMember);
 
@@ -205,7 +210,7 @@ while (true)
                             int clubAssignment = int.Parse(Console.ReadLine());
 
 
-                            SingleClubMember newSingleClubMember = new(Guid.NewGuid(), memberName, clubs.GetAllClubs()[clubAssignment - 1].Name,0.0m);
+                            SingleClubMember newSingleClubMember = new(Guid.NewGuid(), memberName, clubs.GetAllClubs()[clubAssignment - 1].Name, 0.00m);
 
                             DataAccess.AddSingleClubMember(newSingleClubMember);
 

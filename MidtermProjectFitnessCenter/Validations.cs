@@ -75,14 +75,14 @@ namespace MidtermProjectFitnessCenter
 
             foreach (var member in single.GetSingleClubMembers())
             {
-                if (member.Name == Name)
+                if (member.Name.ToLower() == Name)
                 {
                     userType = "single";
                 }
             }
             foreach (var member in multi.GetMultiClubMembers())
             {
-                if (member.Name == Name)
+                if (member.Name.ToLower() == Name)
                 {
                     userType = "multi";
                 }

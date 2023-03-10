@@ -86,13 +86,14 @@ namespace MidtermProjectFitnessCenter
                 string s;
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains(name))
+                    if (s.ToLower().Contains(name))
                     {
                         string[] values = s.Split(",");
-                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]));
+                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1].ToLower(), values[2], decimal.Parse(values[3]));
                         singleClubMember.Add(deseralizeSingleClubMember);
                     }
                 }
+            
             }
             return singleClubMember;
         }
@@ -143,7 +144,7 @@ namespace MidtermProjectFitnessCenter
                 string s;
                 while ((s = sr.ReadLine()) != null)
                 {
-                    if (s.Contains(name))
+                    if (s.ToLower().Contains(name))
                     {
                         string[] values = s.Split(",");
                         MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]), decimal.Parse(values[3]));
@@ -178,7 +179,7 @@ namespace MidtermProjectFitnessCenter
             
             using (StreamWriter writer = new StreamWriter(stream))
             {
-                writer.WriteLine($"{singleClubMember.Id},{singleClubMember.Name},{singleClubMember.Club}");
+                writer.WriteLine($"{singleClubMember.Id},{singleClubMember.Name},{singleClubMember.Club},{singleClubMember.Fees}");
             }
         }
 
@@ -189,7 +190,7 @@ namespace MidtermProjectFitnessCenter
 
             using (StreamWriter writer = new StreamWriter(stream))
             {
-                writer.WriteLine($"{multiClubMember.Id},{multiClubMember.Name},{multiClubMember.MembershipPoints}");
+                writer.WriteLine($"{multiClubMember.Id},{multiClubMember.Name},{multiClubMember.MembershipPoints},{multiClubMember.Fees}");
             }
         }
 

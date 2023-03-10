@@ -36,8 +36,7 @@ namespace MidtermProjectFitnessCenter
 
             DataAccess.AddMultiClubMember(updateMemberPoints);
 
-            Console.Write("\nPress any key to return to menu...");
-            Console.ReadKey();
+            Thread.Sleep(3000);
             Console.Clear();
         }
 
