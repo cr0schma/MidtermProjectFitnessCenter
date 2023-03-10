@@ -1,1 +1,2 @@
-0b7af35f-7663-4316-b0ae-fb2106fe9679,Chris,Great Lakes Athletic Club,1000,100
+0b7af35f-7663-4316-b0ae-fb2106fe9679,Chris,Great Lakes Athletic Club,100
+6a0b71b1-59de-403c-8921-586052aa9680,Rick Astley,Planet Fitness,100

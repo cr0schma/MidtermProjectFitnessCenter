@@ -55,9 +55,8 @@ while (true)
 
             Console.Write("Please select the club you belong to: ");
 
-            int UserAnswer = int.Parse(Console.ReadLine());
-            try
-            {
+            try { 
+                int UserAnswer = int.Parse(Console.ReadLine());
                 string singleClubAnswerString = singleClubAnswer.GetAllClubs()[UserAnswer - 1].Name;
 
                 // Get user info
@@ -76,7 +75,9 @@ while (true)
             catch
             {
                 Console.WriteLine("Wrong selection");
+                Thread.Sleep(3000);
             }
+            Console.Clear();
         }
         else if (userclubType == "multi")
         {
@@ -93,9 +94,15 @@ while (true)
 
             Console.Write("Please select a club to check into: ");
 
-            int UserAnswer = int.Parse(Console.ReadLine());
+            if (!Validations.verifyUserInput(user))
+            {
+                Console.WriteLine("Please enter a valid name");
+                return;
+            }
+
             try
             {
+                int UserAnswer = int.Parse(Console.ReadLine());
                 string multiClubAnswerString = multiClubAnswer.GetAllClubs()[UserAnswer - 1].Name;
 
                 // Get user info
@@ -114,7 +121,9 @@ while (true)
             catch
             {
                 Console.WriteLine("Wrong selection");
+                Thread.Sleep(3000);
             }
+            Console.Clear();
         }
     }
 

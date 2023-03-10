@@ -53,9 +53,6 @@ namespace MidtermProjectFitnessCenter
                     string[] values = s.Split(",");
                     SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]));
                     singleClubMembers.Add(deseralizeSingleClubMember);
-                    
-
-
                 }
             }
             return singleClubMembers;
@@ -93,26 +90,6 @@ namespace MidtermProjectFitnessCenter
                     {
                         string[] values = s.Split(",");
                         SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2], decimal.Parse(values[3]));
-                        singleClubMember.Add(deseralizeSingleClubMember);
-                    }
-                }
-            }
-            return singleClubMember;
-        }
-
-        public static List<SingleClubMember> GetSingleClubMember(string name)
-        {
-            List<SingleClubMember> singleClubMember = new List<SingleClubMember>();
-
-            using (StreamReader sr = File.OpenText(singleMembersFilePath))
-            {
-                string s;
-                while ((s = sr.ReadLine()) != null)
-                {
-                    if (s.Contains(name))
-                    {
-                        string[] values = s.Split(",");
-                        SingleClubMember deseralizeSingleClubMember = new SingleClubMember(Guid.Parse(values[0]), values[1], values[2]);
                         singleClubMember.Add(deseralizeSingleClubMember);
                     }
                 }
@@ -170,26 +147,6 @@ namespace MidtermProjectFitnessCenter
                     {
                         string[] values = s.Split(",");
                         MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]), decimal.Parse(values[3]));
-                        multiClubMember.Add(deseralizeMultiClubMember);
-                    }
-                }
-            }
-            return multiClubMember;
-        }
-
-        public static List<MultiClubMember> GetMultiClubMember(string name)
-        {
-            List<MultiClubMember> multiClubMember = new List<MultiClubMember>();
-
-            using (StreamReader sr = File.OpenText(multiMembersFilePath))
-            {
-                string s;
-                while ((s = sr.ReadLine()) != null)
-                {
-                    if (s.Contains(name))
-                    {
-                        string[] values = s.Split(",");
-                        MultiClubMember deseralizeMultiClubMember = new MultiClubMember(Guid.Parse(values[0]), values[1], int.Parse(values[2]));
                         multiClubMember.Add(deseralizeMultiClubMember);
                     }
                 }
